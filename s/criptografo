@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptógrafo Forense GCBA</title>
+    <style>
+        :root {
+            --fondo: #0a0a0a;
+            --cian: #00e5ff;
+            --gris-plomo: #151515;
+            --texto: #e0e0e0;
+            --borde: #333;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Fuente de terminal hacker */
+            background-color: var(--fondo);
+            color: var(--texto);
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--cian);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        p { color: #888; margin-bottom: 30px; font-size: 0.9rem; }
+
+        .contenedor {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        @media (max-width: 768px) {
+            .contenedor { flex-direction: column; }
+        }
+
+        .caja-texto {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: var(--cian);
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        textarea {
+            background-color: var(--gris-plomo);
+            border: 1px solid var(--borde);
+            color: var(--texto);
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            border-radius: 5px;
+            resize: none;
+            height: 250px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--cian);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+        }
+
+        .controles {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        button {
+            flex: 1;
+            background-color: transparent;
+            color: var(--cian);
+            border: 2px solid var(--cian);
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--cian);
+            color: var(--fondo);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+
+        .btn-secundario {
+            border-color: #555;
+            color: #ccc;
+        }
+
+        .btn-secundario:hover {
+            background-color: #555;
+            color: white;
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>🔒 Encriptador Nivel 5</h1>
+    <p>División Laboratorio Lugar del Hecho | Protocolo de mensajes seguros</p>
+
+    <div class="contenedor">
+        <div class="caja-texto">
+            <label>1. Ingresá el texto original acá (solo minúsculas):</label>
+            <textarea id="texto-entrada" placeholder="escribe tu mensaje secreto..."></textarea>
+        </div>
+
+        <div class="caja-texto">
+            <label>2. Resultado procesado:</label>
+            <textarea id="texto-salida" readonly placeholder="el resultado aparecerá acá..."></textarea>
+        </div>
+    </div>
+
+    <div class="controles">
+        <button onclick="encriptar()">Encriptar 🔐</button>
+        <button onclick="desencriptar()" class="btn-secundario">Desencriptar 🔓</button>
+        <button onclick="copiarTexto()" class="btn-secundario">Copiar 📋</button>
+    </div>
+
+    <script>
+        // LÓGICA DEL
