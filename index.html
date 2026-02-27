@@ -3,142 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GCBA - Criminología y Análisis</title>
+    <title>Policía Científica | Élite</title>
     <style>
         :root {
-            --gcba-amarillo: #FFD500;
-            --gris-oscuro: #2C2C2C;
-            --blanco: #FFFFFF;
-            --gris-claro: #F4F4F4;
+            --fondo-oscuro: #0a0a0a;
+            --uv-cyan: #00f3ff;
+            --uv-purpura: #b500ff;
+            --texto-claro: #e0e0e0;
         }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--gris-claro); 
-            color: var(--gris-oscuro); 
+        
+        body {
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            background-color: var(--fondo-oscuro);
+            color: var(--texto-claro);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
         }
-        header { 
-            background-color: var(--gcba-amarillo); 
-            padding: 20px 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        /* Glitch y Neón */
+        .neon-text {
+            color: #fff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--uv-cyan),
+                0 0 40px var(--uv-cyan),
+                0 0 80px var(--uv-cyan);
         }
-        header h1 { 
-            margin: 0; 
-            font-size: 1.5rem; 
-            color: var(--gris-oscuro); 
-            text-transform: uppercase; 
-            font-weight: 900; 
-            letter-spacing: 1px;
+
+        header {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 20px 50px;
+            border-bottom: 2px solid var(--uv-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .hero { 
-            background: linear-gradient(rgba(44, 44, 44, 0.85), rgba(44, 44, 44, 0.85)), url('https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&q=80') center/cover; 
-            color: var(--blanco); 
-            text-align: center; 
-            padding: 120px 20px; 
-        }
-        .hero h2 { 
-            font-size: 3.2rem; 
-            margin-bottom: 15px; 
-            color: var(--gcba-amarillo); 
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            color: var(--uv-cyan);
         }
-        .hero p { 
-            font-size: 1.2rem; 
-            max-width: 700px; 
-            margin: 0 auto 40px auto; 
-            line-height: 1.6; 
-            color: #E0E0E0;
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(181, 0, 255, 0.15) 0%, rgba(10,10,10,1) 70%), 
+                        url('https://images.unsplash.com/photo-1550565118-3a14e8d0386f?auto=format&fit=crop&q=80') center/cover;
+            background-blend-mode: overlay;
+            padding: 0 20px;
         }
-        .btn { 
-            background-color: var(--gcba-amarillo); 
-            color: var(--gris-oscuro); 
-            padding: 15px 35px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            border-radius: 5px; 
-            font-size: 1.1rem; 
-            text-transform: uppercase; 
-            transition: background 0.3s;
+
+        .hero h2 {
+            font-size: 4rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
         }
-        .btn:hover {
-            background-color: #E6C000;
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 20px 0;
+            color: #aaa;
+            font-style: italic;
         }
-        .secciones { 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 60px 20px; 
-            background-color: var(--blanco); 
-            flex-wrap: wrap; 
-            gap: 20px;
+
+        .badge-elite {
+            background: transparent;
+            border: 2px solid var(--uv-purpura);
+            color: var(--uv-purpura);
+            padding: 10px 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(181, 0, 255, 0.4);
         }
-        .card { 
-            text-align: center; 
-            max-width: 320px; 
-            padding: 30px 20px; 
-            border-radius: 10px;
-            background: var(--gris-claro);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+
+        .skills-section {
+            padding: 80px 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            background: #0f0f0f;
         }
-        .card:hover {
-            transform: translateY(-5px);
+
+        .skill-card {
+            background: #151515;
+            padding: 40px 30px;
+            border-top: 4px solid var(--uv-cyan);
+            border-radius: 5px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .card h3 { 
-            color: var(--gcba-amarillo); 
-            font-size: 1.4rem; 
-            background: var(--gris-oscuro); 
-            padding: 15px; 
-            border-radius: 8px; 
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 243, 255, 0.1);
+            border-top-color: var(--uv-purpura);
+        }
+
+        .skill-card::before {
+            content: '100%';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 6rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: 0;
+        }
+
+        .skill-card h3 {
+            font-size: 1.8rem;
+            color: var(--texto-claro);
             margin-top: 0;
+            position: relative;
+            z-index: 1;
         }
-        .card p { 
-            line-height: 1.6; 
-            font-size: 1.05rem;
+
+        .skill-card p {
+            color: #888;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
         }
-        footer { 
-            background-color: var(--gris-oscuro); 
-            color: var(--blanco); 
-            text-align: center; 
-            padding: 25px; 
-            font-size: 0.95rem; 
-            border-top: 5px solid var(--gcba-amarillo);
+
+        .highlight { color: var(--uv-cyan); font-weight: bold; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #050505;
+            border-top: 1px solid #222;
+        }
+
+        footer h4 {
+            color: var(--uv-purpura);
+            letter-spacing: 5px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>GCBA | Gobierno de la Ciudad</h1>
-        <nav style="font-weight: bold; font-size: 1.1rem;">División de Criminología</nav>
+        <h1>División Laboratorio Lugar del Hecho</h1>
+        <div style="color: var(--uv-cyan); font-weight: bold;">ACCESO RESTRINGIDO - NIVEL 5</div>
     </header>
 
     <section class="hero">
-        <h2>Ciencia y Justicia al Servicio de la Ciudad</h2>
-        <p>Implementando el análisis de sistemas y técnicas criminológicas de vanguardia para la investigación de hechos, recolección de evidencia y optimización de procesos en Buenos Aires.</p>
-        <a href="#intranet" class="btn">Acceso a la Intranet</a>
+        <div class="badge-elite">Policía Científica - GCBA</div>
+        <h2 class="neon-text">El crimen perfecto<br>es un mito.</h2>
+        <p>"Ustedes ven caos. Nosotros vemos la firma del autor. Si dejaste un rastro, ya perdiste."</p>
     </section>
 
-    <section class="secciones">
-        <div class="card">
-            <h3>🔬 Laboratorio Forense</h3>
-            <p>Estudio detallado del lugar del hecho con los más altos estándares de rigor científico y cadena de custodia.</p>
+    <section class="skills-section">
+        <div class="skill-card">
+            <h3>Revelado Implacable</h3>
+            <p>Donde el ojo humano falla, la ciencia manda. Utilizamos cámaras de <span class="highlight">cianoacrilato</span> y <span class="highlight">polvos fluorescentes</span> de última generación. Si tocaste algo, tu identidad física humana ya nos pertenece.</p>
         </div>
-        <div class="card">
-            <h3>💻 Análisis de Sistemas</h3>
-            <p>Procesamiento de información y digitalización de evidencias mediante la integración de bases de datos seguras.</p>
+        
+        <div class="skill-card">
+            <h3>Análisis de la Escena</h3>
+            <p>Barrido sistemático bajo <span class="highlight">luz UV</span> para detección de fluidos biológicos. Procesamiento balístico, armas y herramientas. La evidencia grita la verdad, y nosotros somos sus únicos traductores oficiales.</p>
         </div>
-        <div class="card">
-            <h3>📊 Prevención y Patrones</h3>
-            <p>Estrategias criminológicas basadas en el mapeo de comportamiento criminal y estadísticas urbanas avanzadas.</p>
-        </div>
-    </section>
 
-    <footer>
-        <p>Gobierno de la Ciudad de Buenos Aires - Área de Criminología y Análisis de Sistemas</p>
-        <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">Sistema de acceso restringido para personal autorizado.</p>
-    </footer>
-</body>
-</html>
+        <div class="skill-card">
+            <h3>Custodia Inquebrantable</h3>
+            <p>Acá no hay "envoltorio vulnerable" que valga. Si entra a nuestro laboratorio, la <span class="highlight">cadena de custodia</span> es ley. Procesamos, documentamos y fulminamos las dudas del tribunal con un nivel técnico que la defensa no puede ni leer.</p>
+        </div>
