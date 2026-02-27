@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCBA - Criminología y Análisis</title>
+    <style>
+        :root {
+            --gcba-amarillo: #FFD500;
+            --gris-oscuro: #2C2C2C;
+            --blanco: #FFFFFF;
+            --gris-claro: #F4F4F4;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--gris-claro); 
+            color: var(--gris-oscuro); 
+        }
+        header { 
+            background-color: var(--gcba-amarillo); 
+            padding: 20px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 1.5rem; 
+            color: var(--gris-oscuro); 
+            text-transform: uppercase; 
+            font-weight: 900; 
+            letter-spacing: 1px;
+        }
+        .hero { 
+            background: linear-gradient(rgba(44, 44, 44, 0.85), rgba(44, 44, 44, 0.85)), url('https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&q=80') center/cover; 
+            color: var(--blanco); 
+            text-align: center; 
+            padding: 120px 20px; 
+        }
+        .hero h2 { 
+            font-size: 3.2rem; 
+            margin-bottom: 15px; 
+            color: var(--gcba-amarillo); 
+            text-transform: uppercase;
+        }
+        .hero p { 
+            font-size: 1.2rem; 
+            max-width: 700px; 
+            margin: 0 auto 40px auto; 
+            line-height: 1.6; 
+            color: #E0E0E0;
+        }
+        .btn { 
+            background-color: var(--gcba-amarillo); 
+            color: var(--gris-oscuro); 
+            padding: 15px 35px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            border-radius: 5px; 
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #E6C000;
+        }
+        .secciones { 
+            display: flex; 
+            justify-content: space-around; 
+            padding: 60px 20px; 
+            background-color: var(--blanco); 
+            flex-wrap: wrap; 
+            gap: 20px;
+        }
+        .card { 
+            text-align: center; 
+            max-width: 320px; 
+            padding: 30px 20px; 
+            border-radius: 10px;
+            background: var(--gris-claro);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 { 
+            color: var(--gcba-amarillo); 
+            font-size: 1.4rem; 
+            background: var(--gris-oscuro); 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-top: 0;
+        }
+        .card p { 
+            line-height: 1.6; 
+            font-size: 1.05rem;
+        }
+        footer { 
+            background-color: var(--gris-oscuro); 
+            color: var(--blanco); 
+            text-align: center; 
+            padding: 25px; 
+            font-size: 0.95rem; 
+            border-top: 5px solid var(--gcba-amarillo);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GCBA | Gobierno de la Ciudad</h1>
+        <nav style="font-weight: bold; font-size: 1.1rem;">División de Criminología</nav>
+    </header>
+
+    <section class="hero">
+        <h2>Ciencia y Justicia al Servicio de la Ciudad</h2>
+        <p>Implementando el análisis de sistemas y técnicas criminológicas de vanguardia para la investigación de hechos, recolección de evidencia y optimización de procesos en Buenos Aires.</p>
+        <a href="#intranet" class="btn">Acceso a la Intranet</a>
+    </section>
+
+    <section class="secciones">
+        <div class="card">
+            <h3>🔬 Laboratorio Forense</h3>
+            <p>Estudio detallado del lugar del hecho con los más altos estándares de rigor científico y cadena de custodia.</p>
+        </div>
+        <div class="card">
+            <h3>💻 Análisis de Sistemas</h3>
+            <p>Procesamiento de información y digitalización de evidencias mediante la integración de bases de datos seguras.</p>
+        </div>
+        <div class="card">
+            <h3>📊 Prevención y Patrones</h3>
+            <p>Estrategias criminológicas basadas en el mapeo de comportamiento criminal y estadísticas urbanas avanzadas.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Gobierno de la Ciudad de Buenos Aires - Área de Criminología y Análisis de Sistemas</p>
+        <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">Sistema de acceso restringido para personal autorizado.</p>
+    </footer>
+</body>
+</html>
