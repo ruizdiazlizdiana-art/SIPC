@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Policía Científica | Criminalística GCBA</title>
+    <title>Laboratorio Lugar del Hecho | Policía de la Ciudad</title>
     <style>
         :root {
-            --fondo-oscuro: #0a0a0a;
-            --uv-cyan: #00f3ff;
-            --uv-purpura: #b500ff;
-            --texto-claro: #e0e0e0;
-            --gcba-amarillo: #FFD500;
+            --fondo-oscuro: #050505;
+            --cian-fluor: #00e5ff;
+            --amarillo-gcba: #FFD500;
+            --gris-plomo: #1a1a1a;
+            --texto-claro: #f4f4f4;
         }
         
         body {
-            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Impact, sans-serif;
             background-color: var(--fondo-oscuro);
             color: var(--texto-claro);
             margin: 0;
@@ -22,16 +22,10 @@
             overflow-x: hidden;
         }
 
-        /* Neon y Glitch Efectos */
-        .neon-text-cyan {
-            color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--uv-cyan), 0 0 40px var(--uv-cyan);
-        }
-
         header {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 15px 50px;
-            border-bottom: 3px solid var(--gcba-amarillo);
+            background: rgba(5, 5, 5, 0.95);
+            padding: 20px 40px;
+            border-bottom: 2px solid var(--amarillo-gcba);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,180 +34,179 @@
             z-index: 1000;
         }
 
-        header h1 { margin: 0; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gcba-amarillo); }
+        .header-titulos h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--texto-claro);
+        }
+
+        .header-titulos h2 {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            color: var(--amarillo-gcba);
+            letter-spacing: 1px;
+        }
 
         .hero {
-            height: 90vh;
+            height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* Imagen de fondo generada con todos los elementos */
-            background: radial-gradient(circle at center, rgba(181, 0, 255, 0.1) 0%, rgba(10,10,10,1) 90%), 
-                        url('image_0.png') center/cover;
-            background-blend-mode: multiply;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.3), rgba(5,5,5,1)), 
+                        url('https://images.unsplash.com/photo-1614064641913-a530a50115bf?auto=format&fit=crop&q=80') center/cover;
             padding: 0 20px;
-            border-bottom: 2px solid var(--uv-cyan);
-        }
-
-        .hero h2 {
-            font-size: 4.5rem;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -3px;
-            line-height: 0.95;
-        }
-
-        .hero p {
-            font-size: 1.6rem;
-            max-width: 800px;
-            margin: 25px 0 45px 0;
-            color: #ccc;
-            font-weight: bold;
-            font-style: italic;
         }
 
         .badge-elite {
-            background: transparent;
-            border: 2px solid var(--uv-purpura);
-            color: var(--uv-purpura);
-            padding: 10px 25px;
+            border: 2px solid var(--cian-fluor);
+            color: var(--cian-fluor);
+            padding: 10px 20px;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: bold;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(181, 0, 255, 0.5);
-            font-size: 0.9rem;
+            margin-bottom: 30px;
+            background: rgba(0, 229, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
         }
 
-        .skills-section {
-            padding: 100px 50px;
-            background: #0f0f0f;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 45px;
-        }
-
-        .skill-card {
-            background: #151515;
-            padding: 50px 35px;
-            border-top: 5px solid var(--uv-cyan);
-            border-radius: 8px;
-            transition: all 0.5s ease-out;
-            position: relative;
-            overflow: hidden;
-            border-right: 1px solid rgba(0, 243, 255, 0.05);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.15);
-            border-top-color: var(--uv-purpura);
-        }
-
-        /* Íconos grandes transparentes de fondo */
-        .skill-icon-bg {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 8rem;
-            opacity: 0.03;
-            z-index: 0;
-            transition: all 0.5s ease;
-        }
-        
-        .skill-card:hover .skill-icon-bg {
-            opacity: 0.08;
-            color: var(--uv-purpura);
-        }
-
-        .skill-card h3 {
-            font-size: 2rem;
+        .hero h2 {
+            font-size: 5rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
             color: var(--texto-claro);
-            margin-top: 0;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            line-height: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 900px;
+            margin: 30px 0;
+            color: var(--amarillo-gcba);
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .arsenal-section {
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            background: var(--fondo-oscuro);
+        }
+
+        .arsenal-card {
+            background: var(--gris-plomo);
+            padding: 40px 30px;
+            border-left: 4px solid var(--cian-fluor);
+            transition: all 0.3s ease;
             position: relative;
-            z-index: 1;
+        }
+
+        .arsenal-card:hover {
+            transform: translateX(10px);
+            background: #222;
+            box-shadow: -5px 10px 30px rgba(0, 229, 255, 0.1);
+        }
+
+        .arsenal-card h3 {
+            font-size: 1.8rem;
+            color: var(--cian-fluor);
+            margin-top: 0;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .skill-card p {
-            color: #999;
-            line-height: 1.8;
-            font-size: 1.15rem;
-            position: relative;
-            z-index: 1;
+        .arsenal-card p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 1.1rem;
         }
 
-        .highlight-cyan { color: var(--uv-cyan); font-weight: bold; }
-        .highlight-purple { color: var(--uv-purpura); font-weight: bold; }
+        .resaltado { color: var(--texto-claro); font-weight: bold; }
+
+        .tecnologia-estrella {
+            grid-column: 1 / -1;
+            background: linear-gradient(45deg, #111, #1a1a1a);
+            border: 2px solid var(--amarillo-gcba);
+            text-align: center;
+            padding: 50px;
+        }
+
+        .tecnologia-estrella h3 {
+            justify-content: center;
+            color: var(--amarillo-gcba);
+            font-size: 2.5rem;
+        }
 
         footer {
             text-align: center;
-            padding: 50px;
-            background: #050505;
-            border-top: 1px solid #222;
+            padding: 40px;
+            background: #000;
+            border-top: 1px solid #333;
         }
 
-        footer h4 {
-            color: var(--gcba-amarillo);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 900;
-        }
+        footer h4 { color: var(--cian-fluor); letter-spacing: 4px; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>División Laboratorio Lugar del Hecho - Policía Científica GCBA</h1>
-        <div style="color: var(--gcba-amarillo); font-weight: bold;"></div>
+        <div class="header-titulos">
+            <h1>Policía de la Ciudad</h1>
+            <h2>Superintendencia de Policía Científica</h2>
+        </div>
+        <div style="color: var(--cian-fluor); font-weight: bold; text-transform: uppercase;">División Laboratorio Lugar del Hecho</div>
     </header>
 
     <section class="hero">
-        <div class="badge-elite">CRIMINALÍSTICA DE ÉLITE</div>
-        <h2 class="neon-text-cyan">LA CIENCIA<br>NO CONFIESA.</h2>
-        <h2 class="neon-text-cyan">DEMUESTRA.</h2>
-        <p>"Ustedes sospechan. Nosotros procesamos. Si dejaste rastros papilares, balísticos o de calzado, tu libertad caducó. La verdad está en el análisis."</p>
+        <div class="badge-elite">Policía Científica - GCBA</div>
+        <h2>El crimen perfecto<br>es un mito.</h2>
+        <p>"Ustedes ven caos. Nosotros vemos la firma del autor. Si dejaste un rastro, ya perdiste."</p>
     </section>
 
-    <section class="skills-section">
-        <div class="skill-card">
-            <span class="skill-icon-bg">🐾</span>
-            <h3>Identificación Papilar</h3>
-            <p>Donde la defensa ve dudas, nosotros aplicamos <span class="highlight-cyan">cianoacrilato</span> y <span class="highlight-cyan">polvos fluorescentes</span>. No buscamos huellas, garantizamos la identidad física humana. Si lo tocaste, nos pertenecés.</p>
-        </div>
+    <section class="arsenal-section">
         
-        <div class="skill-card">
-            <span class="skill-icon-bg">🧬</span>
-            <h3>Rastros Biológicos</h3>
-            <p>Barrido bajo <span class="highlight-purple">luz UV</span>. Buscamos hasta la última micro-traza de fluido. El análisis forense es nuestro idioma, y tus fluidos biológicos son nuestra evidencia irrefutable.</p>
+        <div class="arsenal-card tecnologia-estrella">
+            <h3>??? Dispositivo Forenscope 4K</h3>
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.3rem;">
+                No importa dónde lo toques, lo vamos a ver. Operamos con espectros de luz de <span class="resaltado">200 a 1100 nm (UV, visible e infrarrojo)</span>. Detectamos y revelamos tus rastros papilares latentes en 4K, con filtros especializados y lentes de altísima sensibilidad, <span class="resaltado">sin comprometer una sola gota de tu ADN</span>.
+            </p>
         </div>
 
-        <div class="skill-card">
-            <span class="skill-icon-bg">👞</span>
-            <h3>Cotejo de Calzado</h3>
-            <p>Expertos en <span class="highlight-cyan">huellas de pie calzado</span>. Cotejamos patrones de suela, desgaste y características únicas. Tu huella en la escena es tu firma oficial.</p>
+        <div class="arsenal-card">
+            <h3>?? Revelado Químico y Físico</h3>
+            <p>Sometemos la evidencia a la <span class="resaltado">cámara de cianoacrilato</span> para fijar lo invisible. Combinamos con polvos físicos pulverulentos, magnéticos y fluorescentes de todos los colores. No hay superficie que camufle tu huella.</p>
         </div>
 
-        <div class="skill-card">
-            <span class="skill-icon-bg">🔒</span>
-            <h3>Cadena de Custodia</h3>
-            <p>Ni un rastro vulnerable. Nuestra <span class="highlight-purple">cadena de custodia</span> es inquebrantable. Procesamos, documentamos y certificamos cada informe pericial con rigor científico inapelable.</p>
+        <div class="arsenal-card">
+            <h3>?? Extracción en Adhesivos</h3>
+            <p>¿Pensaste que usar cinta adhesiva te salvaba? Aplicamos técnicas de revelado de altísima complejidad directamente sobre <span class="resaltado">cintas y superficies engomadas</span>. Tu identidad queda pegada a la evidencia.</p>
         </div>
 
-        <div class="skill-card" style="grid-column: span 1; transition: none; cursor: help;">
-            <span class="skill-icon-bg">🛸</span>
-            <h3 style="color: #aaa;">Relevamiento con Drone</h3>
-            <p style="color: #666;">En proceso de implementación. Estamos digitalizando las escenas del hecho desde el aire. Lo que no ves en el suelo, nosotros lo relevamos a 20 metros de altura.</p>
+        <div class="arsenal-card">
+            <h3>?? Cotejo de Calzado</h3>
+            <p>Tu forma de pisar es tu condena. Levantamos y procesamos <span class="resaltado">huellas de pie calzado</span> con precisión milimétrica. Cotejamos el desgaste y el patrón hasta ponerte en la escena del hecho.</p>
         </div>
+
+        <div class="arsenal-card">
+            <h3>?? Relevamiento Aéreo</h3>
+            <p>Digitalizamos la escena desde el aire. Nuestro despliegue de <span class="resaltado">drones</span> asegura que el perímetro completo quede documentado. Si intentaste escapar, tenemos el mapa exacto de tu huida.</p>
+        </div>
+
     </section>
 
     <footer>
-        <h4>Criminalística de Vanguardia - GCBA</h4>
-        <p style="color: #666;">Ustedes mienten. Sus rastros, no.</p>
+        <h4>LABORATORIO LUGAR DEL HECHO</h4>
+        <p style="color: #666;">Gobierno de la Ciudad de Buenos Aires. La evidencia es absoluta.</p>
     </footer>
 
 </body>
