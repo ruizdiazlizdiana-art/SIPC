@@ -144,4 +144,51 @@
     </div>
 
     <script>
-        // LÓGICA DEL
+        // LÓGICA DEL SISTEMA (Tu parte de Analista de Sistemas)
+
+        // Las "llaves" secretas. Si querés, podés cambiar estas palabras por otras.
+        // a = ai, e = enter, i = imes, o = ober, u = ufat
+        
+        function encriptar() {
+            // 1. Agarramos lo que el usuario escribió
+            let texto = document.getElementById("texto-entrada").value.toLowerCase();
+            
+            // 2. Usamos replaceAll para buscar y reemplazar letras por los códigos
+            let textoEncriptado = texto
+                .replaceAll("e", "enter")
+                .replaceAll("i", "imes")
+                .replaceAll("a", "ai")
+                .replaceAll("o", "ober")
+                .replaceAll("u", "ufat");
+            
+            // 3. Imprimimos el resultado en la segunda caja
+            document.getElementById("texto-salida").value = textoEncriptado;
+        }
+
+        function desencriptar() {
+            // 1. Agarramos el texto encriptado de la primera caja
+            let texto = document.getElementById("texto-entrada").value.toLowerCase();
+            
+            // 2. Hacemos el proceso inverso: buscamos el código y lo volvemos letra
+            let textoDesencriptado = texto
+                .replaceAll("enter", "e")
+                .replaceAll("imes", "i")
+                .replaceAll("ai", "a")
+                .replaceAll("ober", "o")
+                .replaceAll("ufat", "u");
+            
+            // 3. Imprimimos
+            document.getElementById("texto-salida").value = textoDesencriptado;
+        }
+
+        function copiarTexto() {
+            // Función extra para copiar el resultado al portapapeles rápido
+            let resultado = document.getElementById("texto-salida");
+            resultado.select();
+            document.execCommand("copy");
+            alert("¡Mensaje copiado al portapapeles, reina!");
+        }
+    </script>
+
+</body>
+</html>
