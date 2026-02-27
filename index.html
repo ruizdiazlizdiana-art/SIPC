@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Policía Científica | Élite</title>
+    <title>Policía Científica | Criminalística GCBA</title>
     <style>
         :root {
             --fondo-oscuro: #0a0a0a;
             --uv-cyan: #00f3ff;
             --uv-purpura: #b500ff;
             --texto-claro: #e0e0e0;
+            --gcba-amarillo: #FFD500;
         }
         
         body {
@@ -21,21 +22,16 @@
             overflow-x: hidden;
         }
 
-        /* Glitch y Neón */
-        .neon-text {
+        /* Neon y Glitch Efectos */
+        .neon-text-cyan {
             color: #fff;
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 20px var(--uv-cyan),
-                0 0 40px var(--uv-cyan),
-                0 0 80px var(--uv-cyan);
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--uv-cyan), 0 0 40px var(--uv-cyan);
         }
 
         header {
-            background: rgba(10, 10, 10, 0.9);
-            padding: 20px 50px;
-            border-bottom: 2px solid var(--uv-cyan);
+            background: rgba(10, 10, 10, 0.95);
+            padding: 15px 50px;
+            border-bottom: 3px solid var(--gcba-amarillo);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,39 +40,37 @@
             z-index: 1000;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--uv-cyan);
-        }
+        header h1 { margin: 0; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gcba-amarillo); }
 
         .hero {
-            height: 80vh;
+            height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at center, rgba(181, 0, 255, 0.15) 0%, rgba(10,10,10,1) 70%), 
-                        url('https://images.unsplash.com/photo-1550565118-3a14e8d0386f?auto=format&fit=crop&q=80') center/cover;
-            background-blend-mode: overlay;
+            /* Imagen de fondo generada con todos los elementos */
+            background: radial-gradient(circle at center, rgba(181, 0, 255, 0.1) 0%, rgba(10,10,10,1) 90%), 
+                        url('image_0.png') center/cover;
+            background-blend-mode: multiply;
             padding: 0 20px;
+            border-bottom: 2px solid var(--uv-cyan);
         }
 
         .hero h2 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
+            line-height: 0.95;
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             max-width: 800px;
-            margin: 20px 0;
-            color: #aaa;
+            margin: 25px 0 45px 0;
+            color: #ccc;
+            font-weight: bold;
             font-style: italic;
         }
 
@@ -84,106 +78,132 @@
             background: transparent;
             border: 2px solid var(--uv-purpura);
             color: var(--uv-purpura);
-            padding: 10px 20px;
+            padding: 10px 25px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: bold;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(181, 0, 255, 0.4);
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(181, 0, 255, 0.5);
+            font-size: 0.9rem;
         }
 
         .skills-section {
-            padding: 80px 50px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            padding: 100px 50px;
             background: #0f0f0f;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 45px;
         }
 
         .skill-card {
             background: #151515;
-            padding: 40px 30px;
-            border-top: 4px solid var(--uv-cyan);
-            border-radius: 5px;
-            transition: all 0.4s ease;
+            padding: 50px 35px;
+            border-top: 5px solid var(--uv-cyan);
+            border-radius: 8px;
+            transition: all 0.5s ease-out;
             position: relative;
             overflow: hidden;
+            border-right: 1px solid rgba(0, 243, 255, 0.05);
         }
 
         .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 243, 255, 0.1);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 243, 255, 0.15);
             border-top-color: var(--uv-purpura);
         }
 
-        .skill-card::before {
-            content: '100%';
+        /* Íconos grandes transparentes de fondo */
+        .skill-icon-bg {
             position: absolute;
             top: -20px;
             right: -20px;
-            font-size: 6rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.03);
+            font-size: 8rem;
+            opacity: 0.03;
             z-index: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .skill-card:hover .skill-icon-bg {
+            opacity: 0.08;
+            color: var(--uv-purpura);
         }
 
         .skill-card h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--texto-claro);
             margin-top: 0;
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .skill-card p {
-            color: #888;
-            line-height: 1.7;
-            font-size: 1.1rem;
+            color: #999;
+            line-height: 1.8;
+            font-size: 1.15rem;
             position: relative;
             z-index: 1;
         }
 
-        .highlight { color: var(--uv-cyan); font-weight: bold; }
+        .highlight-cyan { color: var(--uv-cyan); font-weight: bold; }
+        .highlight-purple { color: var(--uv-purpura); font-weight: bold; }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px;
             background: #050505;
             border-top: 1px solid #222;
         }
 
         footer h4 {
-            color: var(--uv-purpura);
+            color: var(--gcba-amarillo);
             letter-spacing: 5px;
             text-transform: uppercase;
+            font-weight: 900;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>División Laboratorio Lugar del Hecho</h1>
-        <div style="color: var(--uv-cyan); font-weight: bold;">ACCESO RESTRINGIDO - NIVEL 5</div>
+        <h1>División Laboratorio Lugar del Hecho - Policía Científica GCBA</h1>
+        <div style="color: var(--gcba-amarillo); font-weight: bold;"></div>
     </header>
 
     <section class="hero">
-        <div class="badge-elite">Policía Científica - GCBA</div>
-        <h2 class="neon-text">El crimen perfecto<br>es un mito.</h2>
-        <p>"Ustedes ven caos. Nosotros vemos la firma del autor. Si dejaste un rastro, ya perdiste."</p>
+        <div class="badge-elite">CRIMINALÍSTICA DE ÉLITE</div>
+        <h2 class="neon-text-cyan">LA CIENCIA<br>NO CONFIESA.</h2>
+        <h2 class="neon-text-cyan">DEMUESTRA.</h2>
+        <p>"Ustedes sospechan. Nosotros procesamos. Si dejaste rastros papilares, balísticos o de calzado, tu libertad caducó. La verdad está en el análisis."</p>
     </section>
 
     <section class="skills-section">
         <div class="skill-card">
-            <h3>Revelado Implacable</h3>
-            <p>Donde el ojo humano falla, la ciencia manda. Utilizamos cámaras de <span class="highlight">cianoacrilato</span> y <span class="highlight">polvos fluorescentes</span> de última generación. Si tocaste algo, tu identidad física humana ya nos pertenece.</p>
+            <span class="skill-icon-bg">🐾</span>
+            <h3>Identificación Papilar</h3>
+            <p>Donde la defensa ve dudas, nosotros aplicamos <span class="highlight-cyan">cianoacrilato</span> y <span class="highlight-cyan">polvos fluorescentes</span>. No buscamos huellas, garantizamos la identidad física humana. Si lo tocaste, nos pertenecés.</p>
         </div>
         
         <div class="skill-card">
-            <h3>Análisis de la Escena</h3>
-            <p>Barrido sistemático bajo <span class="highlight">luz UV</span> para detección de fluidos biológicos. Procesamiento balístico, armas y herramientas. La evidencia grita la verdad, y nosotros somos sus únicos traductores oficiales.</p>
+            <span class="skill-icon-bg">🧬</span>
+            <h3>Rastros Biológicos</h3>
+            <p>Barrido bajo <span class="highlight-purple">luz UV</span>. Buscamos hasta la última micro-traza de fluido. El análisis forense es nuestro idioma, y tus fluidos biológicos son nuestra evidencia irrefutable.</p>
         </div>
 
         <div class="skill-card">
-            <h3>Custodia Inquebrantable</h3>
-            <p>Acá no hay "envoltorio vulnerable" que valga. Si entra a nuestro laboratorio, la <span class="highlight">cadena de custodia</span> es ley. Procesamos, documentamos y fulminamos las dudas del tribunal con un nivel técnico que la defensa no puede ni leer.</p>
+            <span class="skill-icon-bg">👞</span>
+            <h3>Cotejo de Calzado</h3>
+            <p>Expertos en <span class="highlight-cyan">huellas de pie calzado</span>. Cotejamos patrones de suela, desgaste y características únicas. Tu huella en la escena es tu firma oficial.</p>
         </div>
+
+        <div class="skill-card">
+            <span class="skill-icon-bg">🔒</span>
+            <h3>Cadena de Custodia</h3>
+            <p>Ni un rastro vulnerable. Nuestra <span class="highlight-purple">cadena de custodia</span> es inquebrantable. Procesamos, documentamos y certificamos cada informe pericial con rigor científico inapelable.</p>
+        </div>
+
+        <div class="skill-card" style="grid-column: span 1; transition: none; cursor: help;">
+            <span class="skill-icon-bg">🛸</span>
+            <h3 style="color: #
