@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA CRUD - Cadena de Custodia</title>
+    <style>
+        :root {
+            --gcba-amarillo: #FFD500;
+            --fondo-oscuro: #121212;
+            --tarjeta: #1e1e1e;
+            --texto: #f4f4f4;
+            --cian-fluor: #00e5ff;
+            --borde: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--fondo-oscuro);
+            color: var(--texto);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 { color: var(--gcba-amarillo); text-transform: uppercase; letter-spacing: 1px; }
+        
+        .contenedor-principal {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        /* Formulario (El CREATE / UPDATE) */
+        .panel-formulario {
+            background-color: var(--tarjeta);
+            padding: 20px;
+            border-top: 4px solid var(--cian-fluor);
+            border-radius: 5px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .grupo-input { margin-bottom: 15px; }
+        .grupo-input label { display: block; font-size: 0.85rem; font-weight: bold; color: var(--cian-fluor); margin-bottom: 5px; text-transform: uppercase; }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #2a2a2a;
+            border: 1px solid var(--borde);
+            color: white;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus { outline: none; border-color: var(--gcba-amarillo); }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--gcba-amarillo);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #e6c000; }
+
+        /* Tabla (El READ) */
+        .panel-tabla {
+            flex: 2;
+            min-width: 400px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--tarjeta);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--borde); }
+        th { background-color: #000; color: var(--gcba-amarillo); text-transform: uppercase; font-size: 0.85rem; }
+        td { font-size: 0.9rem; }
+
+        .btn-accion {
+            width: auto;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            background-color: transparent;
+            border: 1px solid;
+            color: var(--texto);
+        }
+        .btn-editar { border-color: var(--cian-fluor); color: var(--cian-fluor); }
+        .btn-editar:hover { background-color: var(--cian-fluor); color: #000; }
+        .btn-borrar { border-color: #ff4444; color: #ff4444; }
+        .btn-borrar:hover { background-color: #ff4444; color: white; }
+
+        .identificador { color: var(--cian-fluor); font-weight: bold; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">🛡️ Registro Digital: Cadena de Custodia</h1>
+
+    <div class="contenedor-principal">
+        
+        <div class="panel-formulario">
+            <h2 id="titulo-form">Cargar Evidencia</h2>
+            
+            <input type="hidden" id="indice-editando" value="-1">
+
+            <div class="grupo-input">
+                <label>Carátula / Juzgado</label>
+                <input type="text" id="caratula" placeholder="Ej: Robo calificado...">
+            </div>
+            
+            <div class="grupo-input">
+                <label>Sumario N° / Causa N°</label>
+                <input type="text" id="sumario" placeholder="Ej: 20/2026">
+            </div>
+
+            <div class="grupo-input">
+                <label>Lugar de secuestro</label>
+                <input type="text" id="lugar" placeholder="Calle, altura, ambiente...">
+            </div>
+
+            <div class="grupo-input">
+                <label>Descripción del elemento (Cantidad y detalle)</label>
+                <textarea id="descripcion" rows="3" placeholder="Ej: 01 Arma de fuego tipo pistola..."></textarea>
+            </div>
+
+            <div class="grupo-input">
+                <label>Medio de preservación</label>
+                <input type="text" id="preservacion" placeholder="Ej: Sobre papel madera precintado">
+            </div>
+
+            <button onclick="guardarEvidencia()" id="btn-guardar">Registrar en Sistema</button>
+        </div>
+
+        <div class="panel-tabla">
+            <table id="tabla-evidencias">
+                <thead>
+                    <tr>
+                        <th>Sumario N°</th>
+                        <th>Carátula</th>
+                        <th>Descripción</th>
+                        <th>Lugar</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla">
+                    </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. INICIALIZACIÓN: Leer de la memoria (READ)
+        // Buscamos si ya hay algo guardado en el navegador. Si no, arrancamos con un Array vacío [].
+        let baseDeDatos = JSON.parse(localStorage.getItem('archivoCustodia')) || [];
+
+        // 2. RENDERIZAR LA TABLA
+        function actualizarTabla() {
+            const cuerpo = document.getElementById('cuerpo-tabla');
+            cuerpo.innerHTML = ''; // Limpiamos la tabla antes de dibujar
+
+            baseDeDatos.forEach((evidencia, indice) => {
+                const fila = `
+                    <tr>
+                        <td class="identificador">${evidencia.sumario}</td>
+                        <td>${evidencia.caratula}</td>
+                        <td>${evidencia.descripcion}</td>
+                        <td>${evidencia.lugar}</td>
+                        <td>
+                            <button class="btn-accion btn-editar" onclick="prepararEdicion(${indice})">Editar</button>
+                            <button class="btn-accion btn-borrar" onclick="borrarEvidencia(${indice})">Baja</button>
+                        </td>
+                    </tr>
+                `;
+                cuerpo.innerHTML += fila;
+            });
+        }
+
+        // 3. CREAR Y ACTUALIZAR (CREATE / UPDATE)
+        function guardarEvidencia() {
+            // Capturamos los datos del DOM
+            const caratula = document.getElementById('caratula').value;
+            const sumario = document.getElementById('sumario').value;
+            const lugar = document.getElementById('lugar').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const preservacion = document.getElementById('preservacion').value;
+
+            // Validación básica para que no carguen campos vacíos
+            if(!sumario || !descripcion) {
+                alert("Atención perito: Sumario y Descripción son obligatorios.");
+                return;
+            }
+
+            const nuevaEvidencia = { caratula, sumario, lugar, descripcion, preservacion };
+            const indice = document.getElementById('indice-editando').value;
+
+            if (indice === "-1") {
+                // CREATE: Agregamos al final del Array
+                baseDeDatos.push(nuevaEvidencia);
+            } else {
+                // UPDATE: Reemplazamos la evidencia existente
+                baseDeDatos[indice] = nuevaEvidencia;
+                // Reseteamos el formulario al modo "Crear"
+                document.getElementById('indice-editando').value = "-1";
+                document.getElementById('btn-guardar').innerText = "Registrar en Sistema";
+                document.getElementById('titulo-form').innerText = "Cargar Evidencia";
+            }
+
+            // Persistencia: Convertimos a texto y guardamos en LocalStorage
+            localStorage.setItem('archivoCustodia', JSON.stringify(baseDeDatos));
+            
+            // Limpiamos los inputs
+            limpiarFormulario();
+            // Refrescamos la vista
+            actualizarTabla();
+        }
+
+        // 4. PREPARAR EDICIÓN (Cargar datos al formulario)
+        function prepararEdicion(indice) {
+            const evidencia = baseDeDatos[indice];
+            
+            document.getElementById('caratula').value = evidencia.caratula;
+            document.getElementById('sumario').value = evidencia.sumario;
+            document.getElementById('lugar').value = evidencia.lugar;
+            document.getElementById('descripcion').value = evidencia.descripcion;
+            document.getElementById('preservacion').value = evidencia.preservacion;
+
+            // Le decimos al sistema qué número de fila estamos editando
+            document.getElementById('indice-editando').value = indice;
+            document.getElementById('btn-guardar').innerText = "Actualizar Registro";
+            document.getElementById('titulo-form').innerText = "Modificando Registro";
+        }
+
+        // 5. BORRAR (DELETE)
+        function borrarEvidencia(indice) {
+            const confirmar = confirm("¿Autoriza la destrucción de este registro de cadena de custodia?");
+            if (confirmar) {
+                // Eliminamos 1 elemento en la posición del índice
+                baseDeDatos.splice(indice, 1);
+                localStorage.setItem('archivoCustodia', JSON.stringify(baseDeDatos));
+                actualizarTabla();
+            }
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('caratula').value = '';
+            document.getElementById('sumario').value = '';
+            document.getElementById('lugar').value = '';
+            document.getElementById('descripcion').value = '';
+            document.getElementById('preservacion').value = '';
+        }
+
+        // Arrancamos dibujando la tabla con lo que haya en memoria
+        actualizarTabla();
+    </script>
+
+</body>
+</html>
